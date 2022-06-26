@@ -1,18 +1,18 @@
-const client_id = "55847e80caec422d9960cfca61b7618d";
-const client_secret = "5a2d12e22dd842cfa02465559277bda8";
-
 export const getToken = async () => {
   const res = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
-      Authorization: "Basic " + new Buffer(client_id + ":" + client_secret).toString("base64"),
+      Authorization:
+        "Basic " +
+        new Buffer(
+          process.env.NEXT_PUBLIC_CLIENT_ID + ":" + process.env.NEXT_PUBLIC_CLIENT_SECRET
+        ).toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: "grant_type=refresh_token&refresh_token=AQACwKZ70sBOIvj8yls0VruH4hVeibFR7_0-3749vjOuyI8FVVRxx_oDgP5k2nDfwk7dHiPO2KfDN_kIQK5D4fLj9dtESUw7Of-_P98AkoopEzDUgcrP0glRVc5y2NtToqk",
+    body: `grant_type=refresh_token&refresh_token=${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
   });
   const data = await res.json();
   return data.access_token;
-  // setToken(data.access_token);
 };
 
 export const getCurrentlyPlaying = async () => {
@@ -26,7 +26,11 @@ export const getCurrentlyPlaying = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  if (res.status === 204 || res.status > 400) return;
+
   const song = await res.json();
+
   if (!song) return;
 
   const isPlaying = song.is_playing;
@@ -48,9 +52,5 @@ export const getCurrentlyPlaying = async () => {
     duration,
     progress,
   };
-  // console.log(currentSongObj);
-  // getProgress(currentSongObj.progress, currentSongObj.duration);
-  // setCurrentSong(currentSongObj);
-  // setLoading(false);
   return currentSongObj;
 };

@@ -42,7 +42,7 @@ const Spotify = () => {
     }
   }, [progress, duration]);
 
-  const showTime = (millis) => {
+  const showTime = (millis: number) => {
     var minutes = Math.floor(millis / 60000);
     var seconds = parseInt(((millis % 60000) / 1000).toFixed(0));
 
