@@ -1,12 +1,14 @@
+import React from "react";
+
 // TODO: refactor types
 const GridItem = ({
   colSpan,
   rowSpan,
   children,
 }: {
-  colSpan: any;
-  rowSpan: any;
-  children: any;
+  colSpan: string;
+  rowSpan: string;
+  children: React.ReactNode;
 }) => {
   return (
     <div
