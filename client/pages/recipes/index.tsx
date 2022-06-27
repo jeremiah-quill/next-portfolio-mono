@@ -3,11 +3,12 @@ import RecipeSearch from "../../components/RecipeSearch";
 import Link from "next/link";
 import { extractRecipe } from "../../utils/helpers";
 
+// TODO: make this 100% type safe
 export async function getStaticProps() {
   const res = await fetch("http://localhost:1337/api/recipes?populate=*");
   const { data: rawRecipes } = await res.json();
 
-  const recipes = rawRecipes.map((rawRecipe) => {
+  const recipes = rawRecipes.map((rawRecipe: any) => {
     return extractRecipe(rawRecipe);
   });
 

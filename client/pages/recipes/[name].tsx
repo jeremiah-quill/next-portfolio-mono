@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { extractRecipe } from "../../utils/helpers";
 
-// TODO: how to type context
+// TODO: make this 100% type safe
 export async function getStaticProps({ params }: { params: any }) {
   const { name } = params;
   const res = await fetch("http://localhost:1337/api/recipes?populate=*"); // add "?pupulate=*" to include the upload property within attributes (so we can access images added to Strapi Media Library)
   const { data: rawRecipes } = await res.json();
-  const rawRecipeData = rawRecipes.find((rawRecipe) => rawRecipe.attributes.name === name);
+  const rawRecipeData = rawRecipes.find((rawRecipe: any) => rawRecipe.attributes.name === name);
 
   const recipe = extractRecipe(rawRecipeData);
 

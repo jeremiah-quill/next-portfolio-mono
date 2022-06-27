@@ -1,3 +1,4 @@
+// TODO: how to type context
 export const getToken = async () => {
   const res = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -35,7 +36,7 @@ export const getCurrentlyPlaying = async () => {
 
   const isPlaying = song.is_playing;
   const title = song.item.name;
-  const artist = song.item.artists.map((artist) => artist.name).join(", ");
+  const artist = song.item.artists.map((artist: any) => artist.name).join(", ");
   const album = song.item.album.name;
   const albumImageUrl = song.item.album.images[0].url;
   const songUrl = song.item.external_urls.spotify;

@@ -74,9 +74,9 @@ const Spotify = () => {
     <div className="w-full p-5">
       {currentSong?.isPlaying ? (
         <>
-          <h1 className="text-2xl font-bold text-center mb-5">Now playing</h1>
+          {/* <h1 className="text-2xl font-bold text-center mb-5">Now playing</h1> */}
           <div className="flex gap-2 w-full items-center">
-            <img src={currentSong.albumImageUrl} className="w-20" />
+            <img src={currentSong.albumImageUrl} className="w-16 rounded" />
             <div className="overflow-x-hidden w-full">
               <Marquee gradient={false}>
                 <div className="text-center mb-2 whitespace-nowrap ">
@@ -93,7 +93,7 @@ const Spotify = () => {
                       height: "100%",
                     }}></div>
                 </div>
-                <div className="w-[32px]">{showTime(duration)}</div>
+                <div className="">{showTime(duration)}</div>
               </div>
             </div>
           </div>

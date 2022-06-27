@@ -25,7 +25,8 @@ const Home: NextPage = () => {
         <GridItem>
           <IconLink src={"/github.svg"} url="https://github.com/jeremiah-quill" />
         </GridItem>
-        <GridItem colSpan={"col-span-3"} rowSpan={"row-span-2"}>
+        {/* Now playing */}
+        <GridItem colSpan={"col-span-3"}>
           <Spotify />
         </GridItem>
         {/* Location */}
@@ -53,7 +54,10 @@ const Home: NextPage = () => {
         <GridItem />
         <GridItem />
         <GridItem />
+        <GridItem />
         <GridItem colSpan={"col-span-2"} />
+        <GridItem />
+        <GridItem />
         <GridItem />
         <GridItem />
       </div>

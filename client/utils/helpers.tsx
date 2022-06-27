@@ -1,4 +1,5 @@
-export const extractRecipe = (rawRecipeData) => {
+// TODO: how to type context
+export const extractRecipe = (rawRecipeData: any) => {
   const formattedRecipe = {
     id: rawRecipeData.id,
     name: rawRecipeData.attributes.name,
