@@ -71,7 +71,7 @@ const Spotify = () => {
   if (loading) return <div className="text-center">loading...</div>;
 
   return (
-    <div className="w-full p-5">
+    <div className="w-full p-5 font-robot text-xl text-white">
       {currentSong?.isPlaying ? (
         <>
           {/* <h1 className="text-2xl font-bold text-center mb-5">Now playing</h1> */}

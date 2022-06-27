@@ -33,9 +33,11 @@ export async function getStaticPaths() {
 
 const RecipePage = ({ recipe }: { recipe: any }) => {
   return (
-    <div className="relative w-full h-full py-20">
+    <div className="relative w-full h-full py-20 font-robot">
       <Link href="/recipes">
-        <a className="absolute top-5 left-5 bg-white px-2 font-bold rounded">Back</a>
+        <a className="bg-white px-2 font-bold rounded inline-block mb-10 hover:bg-gray-300">
+          View all recipes
+        </a>
       </Link>
       <div className="bg-white p-10 rounded-md">
         <h1 className="text-4xl mb-3">{recipe.name}</h1>
@@ -46,7 +48,7 @@ const RecipePage = ({ recipe }: { recipe: any }) => {
               ? `http://localhost:1337${recipe.photo}`
               : "https://via.placeholder.com/150"
           }
-          className="mb-5 mx-auto w-full"
+          className="mb-5 mx-auto w-1/2"
         />
         <div className="text-center mb-10">social sharing</div>
         <div className="mb-10">
