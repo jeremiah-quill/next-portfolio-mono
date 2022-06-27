@@ -36,7 +36,6 @@ const Spotify = () => {
   let interval: any;
 
   useEffect(() => {
-    // console.log("in this use effect");
     if (currentSong?.isPlaying) {
       interval = setInterval(() => {
         setProgress((currProgress) => currProgress + 1000);
@@ -77,7 +76,7 @@ const Spotify = () => {
           <div className="flex gap-2 w-full items-center">
             <img src={currentSong.albumImageUrl} className="w-20" />
             <div className="overflow-x-hidden w-full">
-              <Marquee gradientColor={"none"}>
+              <Marquee gradient={false}>
                 <div className="text-center mb-2 whitespace-nowrap ">
                   {!!currentSong && currentSong.title} by: {!!currentSong && currentSong.artist}
                 </div>
