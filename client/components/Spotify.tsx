@@ -25,6 +25,8 @@ const Spotify = () => {
       setCurrentSong(songObj);
       setProgress(songObj.progress);
       setDuration(songObj.duration);
+    } else {
+      setCurrentSong(null);
     }
     setLoading(false);
   };
