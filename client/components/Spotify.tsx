@@ -71,15 +71,15 @@ const Spotify = () => {
   if (loading) return <div className="text-center">loading...</div>;
 
   return (
-    <div className="w-full p-5 font-robot text-xl text-white">
+    <div className="w-full p-5 font-robot text-xl">
       {currentSong?.isPlaying ? (
         <>
-          {/* <h1 className="text-2xl font-bold text-center mb-5">Now playing</h1> */}
-          <div className="flex gap-2 w-full items-center">
+          <h1 className="text-xl mb-3 text-gray-400">Currently listening to...</h1>
+          <div className="flex gap-2 w-full items-center text-white">
             <img src={currentSong.albumImageUrl} className="w-16 rounded" />
             <div className="overflow-x-hidden w-full">
               <Marquee gradient={false}>
-                <div className="text-center mb-2 whitespace-nowrap ">
+                <div className="text-center mb-2 whitespace-nowrap text-sm">
                   {!!currentSong && currentSong.title} by: {!!currentSong && currentSong.artist}
                 </div>
               </Marquee>
@@ -99,7 +99,7 @@ const Spotify = () => {
           </div>
         </>
       ) : (
-        <h1 className="text-2xl font-bold text-center mb-5">Not playing</h1>
+        <h1 className="text-2xl text-center text-gray-400">Currently not playing music.</h1>
       )}
     </div>
   );

@@ -14,7 +14,7 @@ const GridItem = ({
 }: GridItemProps) => {
   return (
     <div
-      className={`${colSpan} ${rowSpan} border-2 rounded-lg border-gray-500 flex justify-center items-center h-full w-full hover:border-orange-400 transition-all overflow-hidden`}>
+      className={`${colSpan} ${rowSpan} border-2 border-gray-500 flex justify-center items-center h-full w-full hover:border-orange-400 transition-all overflow-hidden`}>
       {children}
     </div>
   );

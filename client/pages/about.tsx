@@ -3,7 +3,7 @@ const AboutPage = () => {
     <div className="flex items-center justify-center w-full">
       <div className="">
         <img src="/bio-img-compress.png" className="w-1/4 float-left mr-8 rounded" />
-        <p className="font-robot text-white text-2xl wrap">
+        <p className="font-robot text-gray-400 text-2xl wrap">
           I'm a self-taught developer with a wide range of skills across the stack and a passion for
           learning. I recently graduated from a full stack bootcamp offered by UPenn where I was
           able to refine my skills and experience working as part of a team.

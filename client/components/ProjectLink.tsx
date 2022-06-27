@@ -8,7 +8,7 @@ const ProjectLink = ({
   src: string;
 }) => {
   return (
-    <div className="font-robot text-white text-center">
+    <div className="font-robot text-gray-400 text-center">
       <h1 className="text-2xl">{title}</h1>
       <img src={src} className="w-5/6 m-auto rounded" />
       {/* <h2 className="text-lg">{subtitle}</h2> */}
