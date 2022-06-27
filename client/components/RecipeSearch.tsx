@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const RecipeSearch = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
 
   return (
     <div className="flex w-full mb-10">

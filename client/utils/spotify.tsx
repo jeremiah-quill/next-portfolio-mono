@@ -42,7 +42,6 @@ export const getCurrentlyPlaying = async () => {
   const duration = song.item.duration_ms;
   const progress = song.progress_ms;
   const currentSongObj = {
-    song,
     isPlaying,
     title,
     artist,
@@ -52,5 +51,6 @@ export const getCurrentlyPlaying = async () => {
     duration,
     progress,
   };
+
   return currentSongObj;
 };

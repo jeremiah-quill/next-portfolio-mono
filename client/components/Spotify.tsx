@@ -2,11 +2,22 @@ import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { getCurrentlyPlaying } from "../utils/spotify";
 
+type Song = {
+  isPlaying: boolean;
+  title: string;
+  artist: string;
+  album: string;
+  albumImageUrl: string;
+  songUrl: string;
+  duration: number;
+  progress: number;
+};
+
 const Spotify = () => {
-  const [currentSong, setCurrentSong] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [currentSong, setCurrentSong] = useState<Song | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [progress, setProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
 
   const getSong = async () => {
     const songObj = await getCurrentlyPlaying();
@@ -22,9 +33,10 @@ const Spotify = () => {
     getSong();
   }, []);
 
-  let interval;
+  let interval: any;
 
   useEffect(() => {
+    // console.log("in this use effect");
     if (currentSong?.isPlaying) {
       interval = setInterval(() => {
         setProgress((currProgress) => currProgress + 1000);
@@ -51,8 +63,8 @@ const Spotify = () => {
       : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   };
 
-  const showPercentage = (progress, duration) => {
-    return parseInt((progress / duration) * 100);
+  const showPercentage = (progress: number, duration: number) => {
+    return ((progress / duration) * 100).toFixed();
   };
 
   if (loading) return <div className="text-center">loading...</div>;
