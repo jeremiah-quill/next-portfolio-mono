@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_stack_stacks",
+  "info": {
+    "displayName": "stack"
+  },
+  "options": {},
+  "attributes": {
+    "tech": {
+      "type": "string"
+    }
+  }
+}

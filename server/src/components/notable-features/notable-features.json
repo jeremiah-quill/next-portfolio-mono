@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_notable_features_notable_features",
+  "info": {
+    "displayName": "notable_features",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "feature": {
+      "type": "string"
+    }
+  }
+}

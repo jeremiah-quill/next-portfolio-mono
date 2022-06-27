@@ -12,8 +12,7 @@ const Home: NextPage = () => {
   return (
     <>
       <div className="flex items-center justify-center w-full">
-        <div className="md:aspect-[1.5/1] grid gap-2 grid-cols-3 w-full h-full md:grid-cols-6 md:grid-rows-5 md:h-auto">
-          {/* about */}
+        <div className="md:aspect-[1.5/1] grid gap-2 grid-cols-1 w-full h-full md:grid-cols-6 md:grid-rows-5 md:h-auto">
           <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
             <About />
           </GridItem>
@@ -31,11 +30,9 @@ const Home: NextPage = () => {
               src="/brainfood_hero.png"
             />
           </GridItem>
-          {/* Recipes */}
           <GridItem>
             <IconInternalLink src={"/cookbookios.png"} url="/recipes" title="Food Blog" />
           </GridItem>
-          {/* Github */}
           <GridItem>
             <IconLink src={"/github.svg"} url="https://github.com/jeremiah-quill" title="Github" />
           </GridItem>
@@ -46,7 +43,6 @@ const Home: NextPage = () => {
               src="/wishlist_hero.png"
             />
           </GridItem>
-          {/* about */}
           <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
             <ProjectLink
               title="Playlist Palette"
@@ -55,7 +51,6 @@ const Home: NextPage = () => {
             />
           </GridItem>
           <GridItem />
-          {/* LinkedIn */}
           <GridItem>
             <IconLink
               src={"/linkedin.svg"}
@@ -66,7 +61,6 @@ const Home: NextPage = () => {
           <GridItem />
           <GridItem />
           <GridItem />
-          {/* Now playing */}
           <GridItem colSpan={"col-span-3"}>
             <Spotify />
           </GridItem>

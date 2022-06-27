@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Jeremiah Quill</title>
       </Head>
-      <div className="w-full min-h-screen bg-gray-600 flex justify-center">
+      <div className="w-full min-h-screen bg-gray-600 flex justify-center p-2">
         <div className="md:w-2/3 my-0 mx-auto flex justify-center relative">
           <Header />
           <Component {...pageProps} />

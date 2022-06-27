@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_figures_figures",
+  "info": {
+    "displayName": "figures"
+  },
+  "options": {},
+  "attributes": {
+    "imgUrl": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}
