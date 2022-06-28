@@ -12,6 +12,23 @@ export const extractRecipe = (rawRecipeData: any) => {
   return formattedRecipe;
 };
 
+export const extractProject = (rawProjectData: any) => {
+  const formattedProject = {
+    id: rawProjectData.id,
+    title: rawProjectData.attributes.title,
+    subtitle: rawProjectData.attributes.subtitle,
+    summary: rawProjectData.attributes.summary,
+    liveUrl: rawProjectData.attributes.liveUrl,
+    codeUrl: rawProjectData.attributes.codeUrl,
+    stack: rawProjectData.attributes.stack,
+    figures: rawProjectData.attributes.figures,
+    notable_features: rawProjectData.attributes.notable_features,
+    featuredImgBig: rawProjectData.attributes.featuredImgBig.data[0].attributes.url,
+    slug: rawProjectData.attributes.slug,
+  };
+
+  return formattedProject;
+};
 // * this gets the refresh token
 // export async function getServerSideProps() {
 //   const client_id = "55847e80caec422d9960cfca61b7618d";

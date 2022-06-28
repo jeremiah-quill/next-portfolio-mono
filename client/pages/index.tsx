@@ -1,54 +1,54 @@
 import type { NextPage } from "next";
 
 import GridItem from "../components/GridItem";
-import ProjectLink from "../components/ProjectLink";
-import Location from "../components/Location";
 import IconLink from "../components/IconLink";
 import IconInternalLink from "../components/IconInternalLink";
 import Spotify from "../components/Spotify";
 import About from "../components/About";
+import Gallery from "../components/Gallery";
 
-const Home: NextPage = () => {
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:1337/api/projects?populate=*");
+  const { data: rawProjects } = await res.json();
+
+  const projects = rawProjects.map((project: any) => ({
+    slug: project.attributes.slug,
+    src: project.attributes.featuredImgBig?.data[0].attributes.url,
+    title: project.attributes.title,
+    subtitle: project.attributes.subtitle,
+    id: project.id,
+  }));
+
+  return {
+    props: {
+      projects: projects,
+    },
+  };
+}
+interface Project {
+  slug: string;
+  src: string;
+  title: string;
+  subtitle: string;
+  id: number;
+}
+
+const Home: NextPage = ({ projects }: Project[]) => {
   return (
     <>
       <div className="flex items-center justify-center w-full">
-        <div className="md:aspect-[1.5/1] grid gap-2 grid-cols-1 w-full h-full md:grid-cols-6 md:grid-rows-5 md:h-auto">
+        <div className="md:aspect-[1.5/1] grid gap-2 grid-cols-1 w-full h-full md:grid-cols-6 md:grid-rows-4 md:h-auto text-black">
           <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
             <About />
           </GridItem>
-          <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
-            <ProjectLink
-              title="Flow with Megmo"
-              subtitle="Full stack scheduling tool for online yoga instructor"
-              src="/fwm_hero.png"
-            />
-          </GridItem>
-          <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
-            <ProjectLink
-              title="Brainfood"
-              subtitle="Use GPT-3 AI to generate custom recipes"
-              src="/brainfood_hero.png"
-            />
+          <GridItem colSpan={"col-span-4"} rowSpan={"row-span-3"}>
+            <Gallery projects={projects} />
           </GridItem>
           <GridItem>
             <IconInternalLink src={"/cookbookios.png"} url="/recipes" title="Food Blog" />
           </GridItem>
           <GridItem>
             <IconLink src={"/github.svg"} url="https://github.com/jeremiah-quill" title="Github" />
-          </GridItem>
-          <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
-            <ProjectLink
-              title="Wishlist"
-              subtitle="Secret Santa manager"
-              src="/wishlist_hero.png"
-            />
-          </GridItem>
-          <GridItem colSpan={"col-span-2"} rowSpan={"row-span-2"}>
-            <ProjectLink
-              title="Playlist Palette"
-              subtitle="Create randomized spotify playlists on the fly"
-              src="/pp_hero.png"
-            />
           </GridItem>
           <GridItem />
           <GridItem>
@@ -58,8 +58,6 @@ const Home: NextPage = () => {
               title="LinkedIn"
             />
           </GridItem>
-          <GridItem />
-          <GridItem />
           <GridItem />
           <GridItem colSpan={"col-span-3"}>
             <Spotify />
