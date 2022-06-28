@@ -67,7 +67,7 @@ const Gallery = ({ projects }: Project[]) => {
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
           }}>
-          <Link href={`/projects/${projects[currentSlide].slug}`}>
+          <Link href={`/${projects[currentSlide].slug}`}>
             <a className="h-full w-full flex items-center justify-center text-white">
               <div className="font-robot text-center">
                 <h1 className="text-3xl">{projects[currentSlide].title}</h1>

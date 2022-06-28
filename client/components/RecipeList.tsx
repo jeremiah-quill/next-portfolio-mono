@@ -6,6 +6,7 @@ type Recipe = {
   ingredients: string;
   instructions: string;
   publishedAt: number;
+  slug: string;
   photo: string | null;
 };
 

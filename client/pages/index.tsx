@@ -36,7 +36,7 @@ interface Project {
 const Home: NextPage = ({ projects }: Project[]) => {
   return (
     <>
-      <div className="w-full pt-16">
+      <div className="w-full pt-16 font-robot">
         <div className="text-black grid gap-2 grid-cols-1 grid-rows-8 w-full h-full md:grid-cols-6 md:grid-rows-4 md:h-auto md:aspect-[1.5/1]">
           <GridItem colSpan={"md:col-span-2"} rowSpan={"md:row-span-2"}>
             <About />
@@ -47,7 +47,7 @@ const Home: NextPage = ({ projects }: Project[]) => {
             </div>
           </GridItem>
           <GridItem>
-            <IconInternalLink src={"/cookbookios.png"} url="/recipes" title="Food Blog" />
+            <IconInternalLink src={"/cookbookios.png"} url="/recipes" title="Recipe Feed" />
           </GridItem>
           <GridItem>
             <IconLink src={"/github.svg"} url="https://github.com/jeremiah-quill" title="Github" />
@@ -59,8 +59,8 @@ const Home: NextPage = ({ projects }: Project[]) => {
               title="LinkedIn"
             />
           </GridItem>
-          <GridItem />
-          <GridItem />
+          <GridItem>Coming soon</GridItem>
+          <GridItem>Coming soon</GridItem>
           <GridItem colSpan={"md:col-span-3"}>
             <Spotify />
           </GridItem>

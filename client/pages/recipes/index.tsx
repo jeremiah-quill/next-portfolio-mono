@@ -25,7 +25,7 @@ const RecipesPage = ({ recipes }: { recipes: any }) => {
       <div className="m-auto w-full text-center pt-36 pb-20 text-2xl text-gray-400">
         I've created this recipe feed to play around with the Strapi backend and some simple
         Jamstack functionality. I'm able to manage these entries through a Strapi headless CMS
-        setup. Feel free to comment on and rate any recipes you see here!
+        setup. Comments and rating system under construction.
       </div>
       <RecipeSearch />
       <RecipeList recipes={recipes} />

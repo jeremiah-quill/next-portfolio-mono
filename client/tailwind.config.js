@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         robot: ["VT323"],
+        assistant: ["Assistant"],
       },
     },
   },

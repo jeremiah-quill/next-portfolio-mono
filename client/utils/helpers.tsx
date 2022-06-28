@@ -6,6 +6,7 @@ export const extractRecipe = (rawRecipeData: any) => {
     ingredients: rawRecipeData.attributes.ingredients,
     instructions: rawRecipeData.attributes.instructions,
     publishedAt: rawRecipeData.attributes.publishedAt,
+    slug: rawRecipeData.attributes.slug,
     photo: rawRecipeData.attributes.photo.data?.attributes.url || null,
   };
 
@@ -21,10 +22,15 @@ export const extractProject = (rawProjectData: any) => {
     liveUrl: rawProjectData.attributes.liveUrl,
     codeUrl: rawProjectData.attributes.codeUrl,
     stack: rawProjectData.attributes.stack,
-    figures: rawProjectData.attributes.figures,
+    figures: rawProjectData.attributes.figures.map((figure: any) => ({
+      id: figure.id,
+      caption: figure.caption,
+      imgUrl: figure.imgUrl.data.attributes.url,
+    })),
     notable_features: rawProjectData.attributes.notable_features,
     featuredImgBig: rawProjectData.attributes.featuredImgBig.data[0].attributes.url,
     slug: rawProjectData.attributes.slug,
+    featureSpotlight: rawProjectData.attributes.featureSpotlight,
   };
 
   return formattedProject;

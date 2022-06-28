@@ -5,9 +5,9 @@ const AboutPage = () => {
         <img src="/bio-img-compress.png" className="md:w-1/4 md:float-left md:mr-8 rounded" />
         <p className="font-robot text-gray-400 text-2xl wrap">
           Welcome to my corner of the internet! I use this as a playground to learn technologies and
-          techniques, try out ideas, and show off a little of my personality. Created using NextJS
-          frontend styled with Tailwind and deployed to Vercel, with content managed through a
-          Strapi backend deployed to Heroku.
+          techniques, try out ideas, and show off a little of my personality. Built with a NextJS
+          frontend, styled with Tailwind and deployed to Vercel. Content managed through a Strapi
+          headless CMS backend deployed to Heroku.
           <br></br>
           <br></br>
           I'm a self-taught developer with a wide range of skills across the stack and a passion for
@@ -22,11 +22,12 @@ const AboutPage = () => {
           <br></br>
           That's my son, Remi, you see over there. He's a cool little dude. I want to show him as he
           grows up that it's never too late to re-invent yourself and find success in your passions.
-          That's why I continue to grind every day to improve as a developer.
           <br></br>
           <br></br>
-          I'm currently available for freelance opportunities, contract roles, or full time
-          positions. Please reach out @jcq5010@gmail.com, I would love to hear from you!
+          <span className="text-white">
+            I'm currently available for freelance opportunities, contract roles, or full time
+            positions. Please reach out @jcq5010@gmail.com, I would love to hear from you!
+          </span>
         </p>
       </div>
     </div>

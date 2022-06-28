@@ -34,6 +34,7 @@ const Spotify = () => {
 
   useEffect(() => {
     getSong();
+    // getLastPlayed();
   }, []);
 
   let interval: any;

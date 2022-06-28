@@ -3,10 +3,10 @@ import { extractRecipe } from "../../utils/helpers";
 
 // TODO: make this 100% type safe
 export async function getStaticProps({ params }: { params: any }) {
-  const { name } = params;
+  const { slug } = params;
   const res = await fetch("http://localhost:1337/api/recipes?populate=*"); // add "?pupulate=*" to include the upload property within attributes (so we can access images added to Strapi Media Library)
   const { data: rawRecipes } = await res.json();
-  const rawRecipeData = rawRecipes.find((rawRecipe: any) => rawRecipe.attributes.name === name);
+  const rawRecipeData = rawRecipes.find((rawRecipe: any) => rawRecipe.attributes.slug === slug);
 
   const recipe = extractRecipe(rawRecipeData);
 
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
   const recipePaths = data.map((el: any) => ({
     params: {
-      name: el.attributes.name,
+      slug: el.attributes.slug,
     },
   }));
 
@@ -35,7 +35,7 @@ const RecipePage = ({ recipe }: { recipe: any }) => {
   return (
     <div className="relative w-full h-full py-20 font-robot">
       <Link href="/recipes">
-        <a className="bg-white px-2 font-bold rounded inline-block mb-10 hover:bg-gray-300">
+        <a className="bg-white px-2 font-bold rounded inline-block mb-10 hover:bg-gray-400">
           View all recipes
         </a>
       </Link>
@@ -50,21 +50,23 @@ const RecipePage = ({ recipe }: { recipe: any }) => {
           }
           className="mb-5 mx-auto w-1/2"
         />
-        <div className="text-center mb-10">social sharing</div>
+        {/* <div className="text-center mb-10">social sharing</div> */}
         <div className="mb-10">
           <h2 className="text-2xl mb-2 text-center">Ingredients</h2>
-          <ul className="text-center">
+          <div>{recipe.ingredients}</div>
+          {/* <ul className="text-center">
             <li>3 lbs. rice</li>
             <li>2 potatoes</li>
             <li>2 cups water</li>
             <li>minced garlic</li>
             <li>salt and pepper</li>
             <li>1/2 teaspoon paprika</li>
-          </ul>
+          </ul> */}
         </div>
         <div>
           <h2 className="text-2xl mb-2 text-center">Instructions</h2>
-          <ol className="list-decimal flex flex-col gap-2">
+          <div> {recipe.instructions}</div>
+          {/* <ol className="list-decimal flex flex-col gap-2">
             <li>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure id distinctio quaerat
               inventore commodi tempore, obcaecati officiis iste ad soluta quos culp
@@ -85,7 +87,7 @@ const RecipePage = ({ recipe }: { recipe: any }) => {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur, numquam
               exercitationem nostrum minus dicta, dolores in, asperiores ullam deleniti animi totam
             </li>
-          </ol>
+          </ol> */}
         </div>
       </div>
     </div>
