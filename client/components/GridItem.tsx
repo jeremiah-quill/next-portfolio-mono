@@ -1,4 +1,5 @@
 import React from "react";
+import { getCol, getRow } from "../utils/helpers";
 
 type GridItemProps = {
   colSpan?: string;
@@ -7,14 +8,10 @@ type GridItemProps = {
 };
 
 // TODO: refactor types
-const GridItem = ({
-  colSpan = "col-span-1",
-  rowSpan = "row-span-1",
-  children = null,
-}: GridItemProps) => {
+const GridItem = ({ colSpan = 1, rowSpan = 1, children = null }: GridItemProps) => {
   return (
     <div
-      className={`${colSpan} ${rowSpan} text-black bg-gray-500 border-2 border-transparent  flex justify-center items-center h-full w-full hover:border-orange-400 transition-all overflow-hidden`}>
+      className={`${colSpan} ${rowSpan} text-black bg-gray-500 border-2 border-transparent flex justify-center items-center h-[300px] md:h-full w-full hover:border-orange-400 transition-all overflow-hidden`}>
       {children}
     </div>
   );

@@ -18,6 +18,7 @@ const Spotify = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [progress, setProgress] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
+  const [playMarquee, setPlayMarquee] = useState<boolean>(false);
 
   const getSong = async () => {
     const songObj = await getCurrentlyPlaying();
@@ -58,7 +59,6 @@ const Spotify = () => {
   const showTime = (millis: number) => {
     var minutes = Math.floor(millis / 60000);
     var seconds = parseInt(((millis % 60000) / 1000).toFixed(0));
-
     return seconds == 60
       ? minutes + 1 + ":00"
       : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
@@ -71,14 +71,17 @@ const Spotify = () => {
   if (loading) return <div className="text-center">loading...</div>;
 
   return (
-    <div className="w-full p-5 font-robot text-xl">
+    <div
+      onMouseEnter={() => setPlayMarquee(true)}
+      onMouseLeave={() => setPlayMarquee(false)}
+      className="w-full p-5 font-robot text-xl">
       {currentSong?.isPlaying ? (
         <>
           <h1 className="text-xl mb-3 text-gray-400">Currently listening to...</h1>
           <div className="flex gap-2 w-full items-center text-white">
             <img src={currentSong.albumImageUrl} className="w-16 rounded" />
             <div className="overflow-x-hidden w-full">
-              <Marquee gradient={false}>
+              <Marquee gradient={false} play={playMarquee}>
                 <div className="text-center mb-2 whitespace-nowrap text-sm">
                   {!!currentSong && currentSong.title} by: {!!currentSong && currentSong.artist}
                 </div>
@@ -99,7 +102,7 @@ const Spotify = () => {
           </div>
         </>
       ) : (
-        <h1 className="text-2xl text-center text-gray-400">Currently not playing music.</h1>
+        <h1 className="text-2xl text-center text-gray-400">Not currently listening to Spotify.</h1>
       )}
     </div>
   );

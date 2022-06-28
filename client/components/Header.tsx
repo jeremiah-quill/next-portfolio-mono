@@ -5,7 +5,7 @@ const Header = () => {
     <div className="flex justify-between top-4 md:left-2 font-robot md:text-2xl w-full text-white z-10 absolute">
       <Link href="/">
         <a className="hover:text-gray-300 transition-all">
-          <h1>Jeremiah Quill: Dev</h1>
+          <h1>Jeremiah Quill: dev</h1>
         </a>
       </Link>
       <div className="flex flex-wrap gap-5">

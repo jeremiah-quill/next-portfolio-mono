@@ -29,6 +29,45 @@ export const extractProject = (rawProjectData: any) => {
 
   return formattedProject;
 };
+
+export const getCol = (num: number) => {
+  switch (num) {
+    case 1:
+      return "md:col-span-1";
+    case 2:
+      return "md:col-span-2";
+    case 3:
+      return "md:col-span-3";
+    case 4:
+      return "md:col-span-4";
+    case 5:
+      return "md:col-span-5";
+    case 6:
+      return "md:col-span-6";
+    default:
+      return;
+  }
+};
+
+export const getRow = (num: number) => {
+  switch (num) {
+    case 1:
+      return "md:row-span-1";
+    case 2:
+      return "md:row-span-2";
+    case 3:
+      return "md:row-span-3";
+    case 4:
+      return "md:row-span-4";
+    case 5:
+      return "md:row-span-5";
+    case 6:
+      return "md:row-span-6";
+    default:
+      return;
+  }
+};
+
 // * this gets the refresh token
 // export async function getServerSideProps() {
 //   const client_id = "55847e80caec422d9960cfca61b7618d";

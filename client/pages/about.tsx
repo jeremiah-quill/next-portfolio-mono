@@ -1,6 +1,6 @@
 const AboutPage = () => {
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="pt-36 ">
       <div className="">
         <img src="/bio-img-compress.png" className="md:w-1/4 md:float-left md:mr-8 rounded" />
         <p className="font-robot text-gray-400 text-2xl wrap">

@@ -4,11 +4,9 @@ export async function getStaticProps({ params }: { params: any }) {
   const { slug } = params;
   const res = await fetch("http://localhost:1337/api/projects?populate=*");
   const { data: rawProjects } = await res.json();
+
   const rawProjectData = rawProjects.find((rawProject: any) => rawProject.attributes.slug === slug);
-
   const project = extractProject(rawProjectData);
-
-  console.log(project);
 
   return {
     props: { project },
@@ -30,7 +28,11 @@ export async function getStaticPaths() {
 }
 
 const ProjectPage = ({ project }: any) => {
-  return <div>{project.title}</div>;
+  return (
+    <div className="w-full flex items-center justify-center">
+      <h1>{project.title}</h1>
+    </div>
+  );
 };
 
 export default ProjectPage;
