@@ -61,7 +61,7 @@ const ProjectPage = ({ project }: any) => {
               lowQualityImg={featuredImgSmall}
               highQualityImg={featuredImgBig}
             /> */}
-            <img src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${project.featuredImgBig}`} />
+            <img src={`${project.featuredImgBig}`} />
           </div>
           <div>
             <h3 className="text-center mb-5 text-4xl font-robot text-white">Summary</h3>
