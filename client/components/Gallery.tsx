@@ -73,7 +73,8 @@ const Gallery = ({ projects }: any) => {
                 <h1 className="text-3xl">{projects[currentSlide].title}</h1>
                 <h2 className="text-xl mb-2">{projects[currentSlide].subtitle}</h2>
                 <img
-                  src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${projects[currentSlide].src}`}
+                  // src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${projects[currentSlide].src}`}
+                  src={`${projects[currentSlide].src}`}
                   className="w-5/6 m-auto rounded"
                 />
               </div>
@@ -86,3 +87,4 @@ const Gallery = ({ projects }: any) => {
 };
 
 export default Gallery;
+https://next-portfolio-bucket.s3.amazonaws.com/brainfood_hero_ca79df3e75.png

@@ -1,22 +1,24 @@
 {
   "collectionName": "components_figures_figures",
   "info": {
-    "displayName": "figures"
+    "displayName": "figures",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "imgUrl": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "caption": {
-      "type": "string"
+      "type": "text"
     }
   }
 }
