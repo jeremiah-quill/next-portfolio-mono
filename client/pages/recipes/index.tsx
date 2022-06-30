@@ -5,7 +5,7 @@ import { extractRecipe } from "../../utils/helpers";
 
 // TODO: make this 100% type safe
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:1337/api/recipes?populate=*");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/recipes?populate=*`);
   const { data: rawRecipes } = await res.json();
 
   const recipes = rawRecipes.map((rawRecipe: any) => {

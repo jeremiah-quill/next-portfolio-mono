@@ -10,11 +10,11 @@ interface Project {
   id: number;
 }
 
-const Gallery = ({ projects }: Project[]) => {
+const Gallery = ({ projects }: any) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isMouseOn, setIsMouseOn] = useState<boolean>(false);
 
-  let interval;
+  let interval: any;
 
   useEffect(() => {
     interval = setInterval(() => {
@@ -73,7 +73,7 @@ const Gallery = ({ projects }: Project[]) => {
                 <h1 className="text-3xl">{projects[currentSlide].title}</h1>
                 <h2 className="text-xl mb-2">{projects[currentSlide].subtitle}</h2>
                 <img
-                  src={`http://localhost:1337${projects[currentSlide].src}`}
+                  src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${projects[currentSlide].src}`}
                   className="w-5/6 m-auto rounded"
                 />
               </div>

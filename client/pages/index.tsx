@@ -8,7 +8,7 @@ import About from "../components/About";
 import Gallery from "../components/Gallery";
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:1337/api/projects?populate=*");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=*`);
   const { data: rawProjects } = await res.json();
 
   const projects = rawProjects.map((project: any) => ({
@@ -33,7 +33,7 @@ interface Project {
   id: number;
 }
 
-const Home: NextPage = ({ projects }: Project[]) => {
+const Home: NextPage = ({ projects }: any) => {
   return (
     <>
       <div className="w-full pt-16 font-robot">

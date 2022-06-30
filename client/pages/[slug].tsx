@@ -3,7 +3,7 @@ import { extractProject } from "../utils/helpers";
 export async function getStaticProps({ params }: { params: any }) {
   const { slug } = params;
   const res = await fetch(
-    "http://localhost:1337/api/projects?populate=featuredImgBig,featureSpotlight,notable_features,figures.imgUrl,stack"
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=featuredImgBig,featureSpotlight,notable_features,figures.imgUrl,stack`
   );
   const { data: rawProjects } = await res.json();
   const rawProjectData = rawProjects.find((rawProject: any) => rawProject.attributes.slug === slug);
@@ -15,7 +15,7 @@ export async function getStaticProps({ params }: { params: any }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch("http://localhost:1337/api/projects");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects`);
   const { data: projects } = await res.json();
 
   const projectPaths = projects.map((project: any) => ({
@@ -61,7 +61,7 @@ const ProjectPage = ({ project }: any) => {
               lowQualityImg={featuredImgSmall}
               highQualityImg={featuredImgBig}
             /> */}
-            <img src={`http://localhost:1337${project.featuredImgBig}`} />
+            <img src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${project.featuredImgBig}`} />
           </div>
           <div>
             <h3 className="text-center mb-5 text-4xl font-robot text-white">Summary</h3>
@@ -100,7 +100,7 @@ const ProjectPage = ({ project }: any) => {
               <img
                 className="rounded mb-5"
                 alt={figure.caption}
-                src={`http://localhost:1337${figure.imgUrl}`}
+                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${figure.imgUrl}`}
               />
               <p className="text-md m-auto px-5 text-center text-white">{figure.caption}</p>
             </div>

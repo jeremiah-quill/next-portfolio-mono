@@ -59,7 +59,10 @@ const ProjectLink = ({
           <div className="font-robot text-center">
             <h1 className="text-3xl">{project.title}</h1>
             <h2 className="text-xl mb-2">{project.subtitle}</h2>
-            <img src={`http://localhost:1337${project.src}`} className="w-5/6 m-auto rounded" />
+            <img
+              src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${project.src}`}
+              className="w-5/6 m-auto rounded"
+            />
           </div>
         </a>
       </Link>
