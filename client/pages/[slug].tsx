@@ -97,11 +97,7 @@ const ProjectPage = ({ project }: any) => {
           </div>
           {project.figures.map((figure: any) => (
             <div key={figure.imgUrl}>
-              <img
-                className="rounded mb-5"
-                alt={figure.caption}
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${figure.imgUrl}`}
-              />
+              <img className="rounded mb-5" alt={figure.caption} src={`${figure.imgUrl}`} />
               <p className="text-md m-auto px-5 text-center text-white">{figure.caption}</p>
             </div>
           ))}
