@@ -87,4 +87,3 @@ const Gallery = ({ projects }: any) => {
 };
 
 export default Gallery;
-https://next-portfolio-bucket.s3.amazonaws.com/brainfood_hero_ca79df3e75.png
