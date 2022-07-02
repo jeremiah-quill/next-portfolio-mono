@@ -1,4 +1,5 @@
 import { extractProject } from "../utils/helpers";
+import { isDev } from "../utils/helpers";
 
 export async function getStaticProps({ params }: { params: any }) {
   const { slug } = params;
@@ -62,7 +63,9 @@ const ProjectPage = ({ project }: any) => {
               lowQualityImg={featuredImgSmall}
               highQualityImg={featuredImgBig}
             /> */}
-            <img src={`${project.featuredImgBig}`} />
+            <img
+              src={`${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL}${project.featuredImgBig}`}
+            />
           </div>
           <div>
             <h3 className="text-center mb-5 text-4xl font-robot text-white">Summary</h3>
@@ -98,7 +101,11 @@ const ProjectPage = ({ project }: any) => {
           </div>
           {project.figures.map((figure: any) => (
             <div key={figure.imgUrl}>
-              <img className="rounded mb-5" alt={figure.caption} src={`${figure.imgUrl}`} />
+              <img
+                className="rounded mb-5"
+                alt={figure.caption}
+                src={`${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL}${figure.imgUrl}`}
+              />
               <p className="text-md m-auto px-5 text-center text-white">{figure.caption}</p>
             </div>
           ))}

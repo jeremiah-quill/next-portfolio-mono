@@ -74,6 +74,20 @@ export const getRow = (num: number) => {
   }
 };
 
+// export const isDev = () => if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+//   return ""
+// } else {
+//   // production code
+// };
+
+export const isDev = () => {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 // * this gets the refresh token
 // export async function getServerSideProps() {
 //   const client_id = "55847e80caec422d9960cfca61b7618d";

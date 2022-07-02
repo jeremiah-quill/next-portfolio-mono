@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { isDev } from "../utils/helpers";
 
 interface Project {
   slug: string;
@@ -73,8 +74,10 @@ const Gallery = ({ projects }: any) => {
                 <h1 className="text-3xl">{projects[currentSlide].title}</h1>
                 <h2 className="text-xl mb-2">{projects[currentSlide].subtitle}</h2>
                 <img
-                  // src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${projects[currentSlide].src}`}
-                  src={`${projects[currentSlide].src}`}
+                  // src={`${projects[currentSlide].src}`}
+                  src={`${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL}${
+                    projects[currentSlide].src
+                  }`}
                   className="w-5/6 m-auto rounded"
                 />
               </div>

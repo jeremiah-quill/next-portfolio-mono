@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { extractRecipe } from "../../utils/helpers";
+import { extractRecipe, isDev } from "../../utils/helpers";
 
 // TODO: make this 100% type safe
 export async function getStaticProps({ params }: { params: any }) {
@@ -43,7 +43,11 @@ const RecipePage = ({ recipe }: { recipe: any }) => {
         <h1 className="text-4xl mb-3">{recipe.name}</h1>
         <div className="mb-3">Recipe details</div>
         <img
-          src={recipe.photo ? `${recipe.photo}` : "https://via.placeholder.com/150"}
+          src={
+            recipe.photo
+              ? `${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL + recipe.photo}`
+              : "https://via.placeholder.com/150"
+          }
           className="mb-5 mx-auto w-1/2"
         />
         {/* <div className="text-center mb-10">social sharing</div> */}

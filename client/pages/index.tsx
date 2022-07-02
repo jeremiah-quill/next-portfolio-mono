@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { isDev } from "../utils/helpers";
 
 import GridItem from "../components/GridItem";
 import IconLink from "../components/IconLink";
@@ -14,6 +15,10 @@ export async function getStaticProps() {
   const projects = rawProjects.map((project: any) => ({
     slug: project.attributes.slug,
     src: project.attributes.featuredImgBig?.data[0].attributes.url,
+    // src: isDev()
+    //   ? process.env.NEXT_PUBLIC_STRAPI_URL +
+    //     project.attributes.featuredImgBig?.data[0].attributes.url
+    //   : project.attributes.featuredImgBig?.data[0].attributes.url,
     title: project.attributes.title,
     subtitle: project.attributes.subtitle,
     id: project.id,
