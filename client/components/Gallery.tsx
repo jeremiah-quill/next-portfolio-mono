@@ -75,7 +75,7 @@ const Gallery = ({ projects }: any) => {
                 <h2 className="text-xl mb-2">{projects[currentSlide].subtitle}</h2>
                 <img
                   // src={`${projects[currentSlide].src}`}
-                  src={`${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL}${
+                  src={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${
                     projects[currentSlide].src
                   }`}
                   className="w-5/6 m-auto rounded"

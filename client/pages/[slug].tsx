@@ -31,7 +31,6 @@ export async function getStaticPaths() {
 }
 
 const ProjectPage = ({ project }: any) => {
-  console.log(project);
   return (
     <div className="w-full pt-36 font-robot text-white">
       <div>
@@ -64,7 +63,7 @@ const ProjectPage = ({ project }: any) => {
               highQualityImg={featuredImgBig}
             /> */}
             <img
-              src={`${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL}${project.featuredImgBig}`}
+              src={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${project.featuredImgBig}`}
             />
           </div>
           <div>
@@ -104,7 +103,7 @@ const ProjectPage = ({ project }: any) => {
               <img
                 className="rounded mb-5"
                 alt={figure.caption}
-                src={`${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL}${figure.imgUrl}`}
+                src={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${figure.imgUrl}`}
               />
               <p className="text-md m-auto px-5 text-center text-white">{figure.caption}</p>
             </div>

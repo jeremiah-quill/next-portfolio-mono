@@ -45,7 +45,7 @@ const RecipePage = ({ recipe }: { recipe: any }) => {
         <img
           src={
             recipe.photo
-              ? `${!!isDev() && process.env.NEXT_PUBLIC_STRAPI_URL + recipe.photo}`
+              ? `${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : "" + recipe.photo}`
               : "https://via.placeholder.com/150"
           }
           className="mb-5 mx-auto w-1/2"
