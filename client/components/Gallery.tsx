@@ -1,68 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { isDev } from "../utils/helpers";
 import { sliderVariants } from "../utils/variants";
-
-interface Project {
-  slug: string;
-  src: string;
-  title: string;
-  subtitle: string;
-  id: number;
-}
+import { wrap } from "popmotion";
 
 const Gallery = ({ projects }: any) => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [isMouseOn, setIsMouseOn] = useState<boolean>(false);
-  // const [direction, setDirection] = useState<number>(1);
+  const [[page, direction], setPage] = useState([0, 0]);
 
-  let interval: any;
+  // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
+  // then wrap that within 0-2 to find our image ID in the array below. By passing an
+  // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
+  // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
+  const imageIndex = wrap(0, projects.length, page);
 
-  useEffect(() => {
-    interval = setInterval(() => {
-      if (!isMouseOn) {
-        setCurrentSlide((curr) => {
-          if (curr === projects.length - 1) {
-            return 0;
-          } else {
-            return curr + 1;
-          }
-        });
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [isMouseOn]);
-
-  // const paginate = (direction: number) => {
-  //   setDirection(direction);
-  //   setCurrentSlide((curr) => {
-  //     if (direction === 1) {
-  //       if (curr === projects.length - 1) {
-  //         return 0;
-  //       } else {
-  //         return curr + 1;
-  //       }
-  //     } else {
-  //       if (curr === 0) {
-  //         return projects.length - 1;
-  //       } else {
-  //         return curr - 1;
-  //       }
-  //     }
-  //   });
-  // };
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
 
   return (
     <>
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} custom={direction}>
         <motion.div
-          onMouseEnter={() => setIsMouseOn(true)}
-          onMouseLeave={() => setIsMouseOn(false)}
           className="absolute w-full h-full"
-          key={currentSlide}
+          key={page}
           variants={sliderVariants}
-          // custom={direction}
+          custom={direction}
           initial="enter"
           animate="center"
           exit="exit"
@@ -70,14 +33,14 @@ const Gallery = ({ projects }: any) => {
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
           }}>
-          <Link href={`/${projects[currentSlide].slug}`}>
+          <Link href={`/${projects[imageIndex].slug}`}>
             <a className="h-full w-full flex items-center justify-center text-white">
               <div className="font-robot text-center">
-                <h1 className="text-3xl">{projects[currentSlide].title}</h1>
-                <h2 className="text-xl mb-2">{projects[currentSlide].subtitle}</h2>
+                <h1 className="text-3xl">{projects[imageIndex].title}</h1>
+                <h2 className="text-xl mb-2">{projects[imageIndex].subtitle}</h2>
                 <img
                   src={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${
-                    projects[currentSlide].src
+                    projects[imageIndex].src
                   }`}
                   className="w-5/6 m-auto rounded"
                 />
@@ -85,15 +48,18 @@ const Gallery = ({ projects }: any) => {
             </a>
           </Link>
         </motion.div>
-        {/* <div>left</div>
-        <div>right</div> */}
       </AnimatePresence>
-      {/* <button onClick={() => paginate(-1)} className="relative z-10">
-        left
+      <button
+        onClick={() => paginate(-1)}
+        className="relative z-10 rotate-180 w-10 h-10 rounded-full bg-white m-3">
+        {"‣"}
       </button>
-      <button onClick={() => paginate(1)} className="relative z-10">
-        right
-      </button> */}
+      <button
+        onClick={() => paginate(1)}
+        className="relative z-10 w-10 h-10 rounded-full bg-white m-3">
+        {"‣"}
+      </button>
+      {/* <div className="absolute z-10 bottom-0 left-1/2 -translate-x-1/2">test</div> */}
     </>
   );
 };

@@ -43,7 +43,7 @@ const Home: NextPage = ({ projects }: any) => {
             <About />
           </GridItem>
           <GridItem colSpan={"md:col-span-4"} rowSpan={"md:row-span-3"}>
-            <div className="relative h-full w-full flex justify-center items-center">
+            <div className="relative h-full w-full flex justify-between items-center">
               <Gallery projects={projects} />
             </div>
           </GridItem>

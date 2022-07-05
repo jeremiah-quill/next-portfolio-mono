@@ -26,7 +26,8 @@ export const getCurrentlyPlaying = async () => {
   });
   if (res.status === 204 || res.status > 400) return;
   const song = await res.json();
-  if (!song) return;
+  if (!song || !song.item?.name) return;
+
   const isPlaying = song.is_playing;
   const title = song.item.name;
   const artist = song.item.artists.map((artist: any) => artist.name).join(", ");
