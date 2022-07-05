@@ -35,5 +35,3 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
-
-// box-shadow: 10px 10px var(--orange-accent)

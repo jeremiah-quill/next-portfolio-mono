@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { isDev } from "../utils/helpers";
+import { sliderVariants } from "../utils/variants";
 
 interface Project {
   slug: string;
@@ -14,42 +15,43 @@ interface Project {
 const Gallery = ({ projects }: any) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isMouseOn, setIsMouseOn] = useState<boolean>(false);
+  // const [direction, setDirection] = useState<number>(1);
 
   let interval: any;
 
   useEffect(() => {
     interval = setInterval(() => {
-      setCurrentSlide((curr) => {
-        if (curr === projects.length - 1) {
-          return 0;
-        } else {
-          return curr + 1;
-        }
-      });
+      if (!isMouseOn) {
+        setCurrentSlide((curr) => {
+          if (curr === projects.length - 1) {
+            return 0;
+          } else {
+            return curr + 1;
+          }
+        });
+      }
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMouseOn]);
 
-  const variants = {
-    enter: () => {
-      return {
-        x: 1000,
-        opacity: 0,
-        zIndex: 0,
-      };
-    },
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: () => {
-      return {
-        zIndex: 0,
-        x: -1000,
-        opacity: 0,
-      };
-    },
-  };
+  // const paginate = (direction: number) => {
+  //   setDirection(direction);
+  //   setCurrentSlide((curr) => {
+  //     if (direction === 1) {
+  //       if (curr === projects.length - 1) {
+  //         return 0;
+  //       } else {
+  //         return curr + 1;
+  //       }
+  //     } else {
+  //       if (curr === 0) {
+  //         return projects.length - 1;
+  //       } else {
+  //         return curr - 1;
+  //       }
+  //     }
+  //   });
+  // };
 
   return (
     <>
@@ -59,8 +61,8 @@ const Gallery = ({ projects }: any) => {
           onMouseLeave={() => setIsMouseOn(false)}
           className="absolute w-full h-full"
           key={currentSlide}
+          variants={sliderVariants}
           // custom={direction}
-          variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
@@ -74,7 +76,6 @@ const Gallery = ({ projects }: any) => {
                 <h1 className="text-3xl">{projects[currentSlide].title}</h1>
                 <h2 className="text-xl mb-2">{projects[currentSlide].subtitle}</h2>
                 <img
-                  // src={`${projects[currentSlide].src}`}
                   src={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${
                     projects[currentSlide].src
                   }`}
@@ -84,7 +85,15 @@ const Gallery = ({ projects }: any) => {
             </a>
           </Link>
         </motion.div>
+        {/* <div>left</div>
+        <div>right</div> */}
       </AnimatePresence>
+      {/* <button onClick={() => paginate(-1)} className="relative z-10">
+        left
+      </button>
+      <button onClick={() => paginate(1)} className="relative z-10">
+        right
+      </button> */}
     </>
   );
 };

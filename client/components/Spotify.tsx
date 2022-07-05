@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
-import { getCurrentlyPlaying } from "../utils/spotify";
+import { getCurrentlyPlaying, getLastPlayed } from "../utils/spotify";
+import RecentlyPlayed from "./RecentlyPlayed";
 
 type Song = {
   isPlaying: boolean;
@@ -20,7 +21,7 @@ const Spotify = () => {
   const [duration, setDuration] = useState<number>(0);
   const [playMarquee, setPlayMarquee] = useState<boolean>(false);
 
-  const getSong = async () => {
+  const getCurrentSong = async () => {
     const songObj = await getCurrentlyPlaying();
     if (songObj && songObj.isPlaying) {
       setCurrentSong(songObj);
@@ -29,12 +30,13 @@ const Spotify = () => {
     } else {
       setCurrentSong(null);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   useEffect(() => {
-    getSong();
-    // getLastPlayed();
+    getCurrentSong();
+    // getRecentTracks();
+    setLoading(false);
   }, []);
 
   let interval: any;
@@ -51,7 +53,7 @@ const Spotify = () => {
   useEffect(() => {
     if (currentSong) {
       if (progress > duration) {
-        getSong();
+        getCurrentSong();
         clearInterval(interval);
       }
     }
@@ -75,7 +77,7 @@ const Spotify = () => {
     <div
       onMouseEnter={() => setPlayMarquee(true)}
       onMouseLeave={() => setPlayMarquee(false)}
-      className="w-full p-5 font-robot text-xl">
+      className="w-full h-full font-robot text-xl">
       {currentSong?.isPlaying ? (
         <>
           <h1 className="text-xl mb-3 text-gray-400">Currently listening to...</h1>
@@ -103,7 +105,12 @@ const Spotify = () => {
           </div>
         </>
       ) : (
-        <h1 className="text-2xl text-center text-gray-400">Not currently listening to Spotify.</h1>
+        // <div className="h-full">
+        //   <h1 className="text-lg text-center text-gray-400">
+        //     Not currently listening to Spotify. But checkout my recently played tracks:
+        //   </h1>
+        <RecentlyPlayed />
+        // </div>
       )}
     </div>
   );
