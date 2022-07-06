@@ -1,5 +1,9 @@
+const TOKEN_URL = "https://accounts.spotify.com/api/token";
+const NOW_PLAYING_URL = "https://api.spotify.com/v1/me/player/currently-playing";
+const RECENTLY_PLAYED_URL = "https://api.spotify.com/v1/me/player/recently-played";
+
 export const getToken = async () => {
-  const res = await fetch("https://accounts.spotify.com/api/token", {
+  const res = await fetch(TOKEN_URL, {
     method: "POST",
     headers: {
       Authorization:
@@ -17,61 +21,22 @@ export const getToken = async () => {
 
 export const getCurrentlyPlaying = async () => {
   const token = await getToken();
-  if (!token) return;
-  const NOW_PLAYING_URL = `https://api.spotify.com/v1/me/player/currently-playing`;
   const res = await fetch(NOW_PLAYING_URL, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  if (res.status === 204 || res.status > 400) return;
-  const song = await res.json();
-  if (!song || !song.item?.name) return;
 
-  const isPlaying = song.is_playing;
-  const title = song.item.name;
-  const artist = song.item.artists.map((artist: any) => artist.name).join(", ");
-  const album = song.item.album.name;
-  const albumImageUrl = song.item.album.images[0].url;
-  const songUrl = song.item.external_urls.spotify;
-  const duration = song.item.duration_ms;
-  const progress = song.progress_ms;
-  const currentSongObj = {
-    isPlaying,
-    title,
-    artist,
-    album,
-    albumImageUrl,
-    songUrl,
-    duration,
-    progress,
-  };
-
-  return currentSongObj;
+  return res;
 };
 
 export const getLastPlayed = async () => {
   const token = await getToken();
-  if (!token) return;
-
-  const RECENTLY_PLAYED_URL = `https://api.spotify.com/v1/me/player/recently-played`;
   const res = await fetch(RECENTLY_PLAYED_URL, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  // if (res.status === 204 || res.status > 400) return;
-  const songs = await res.json();
-  if (!songs) return;
 
-  console.log(songs);
-
-  const tracksResponse = songs.items.map((item: any) => ({
-    name: item.track.name,
-    artists: item.track.artists.map((artist: any) => artist.name).join(", "),
-    album: item.track.album.name,
-    albumImageUrl: item.track.album.images[0].url,
-  }));
-
-  return tracksResponse;
+  return res;
 };

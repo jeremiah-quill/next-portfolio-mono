@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
-import { getLastPlayed } from "../utils/spotify";
 
 const RecentlyPlayed = () => {
   const [showRecent, setShowRecent] = useState<boolean>(false);
   const [tracks, setTracks] = useState<any>([]);
 
   const getRecentTracks = async () => {
-    const tracksResponse = await getLastPlayed();
-    setTracks(tracksResponse);
+    const res = await fetch("/api/getRecentlyPlayed");
+    const data = await res.json();
+    setTracks(data);
   };
 
   useEffect(() => {
     getRecentTracks();
-    // setLoading(false);
   }, []);
 
   return (

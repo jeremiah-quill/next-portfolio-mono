@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Marquee from "react-fast-marquee";
-import { getCurrentlyPlaying, getLastPlayed } from "../utils/spotify";
 import RecentlyPlayed from "./RecentlyPlayed";
+import { showTime, showPercentage } from "../utils/helpers";
 
 type Song = {
   isPlaying: boolean;
@@ -21,26 +20,23 @@ const Spotify = () => {
   const [duration, setDuration] = useState<number>(0);
   const [playMarquee, setPlayMarquee] = useState<boolean>(false);
 
+  // function to fetch current song and set necessary state
   const getCurrentSong = async () => {
     const res = await fetch("/api/getCurrentlyPlaying");
-    const songObj = await res.json();
-
-    if (songObj && songObj.isPlaying) {
-      setCurrentSong(songObj);
-      setProgress(songObj.progress);
-      setDuration(songObj.duration);
-    } else {
-      setCurrentSong(null);
-    }
+    const data = await res.json();
+    if (!data.isPlaying) return;
+    setCurrentSong(data);
+    setProgress(data.progress);
+    setDuration(data.duration);
   };
-
+  // fetch song on component mount
   useEffect(() => {
     getCurrentSong();
     setLoading(false);
   }, []);
 
+  // when current song changes, start the timer based on current progress and total song duration
   let interval: any;
-
   useEffect(() => {
     if (currentSong?.isPlaying) {
       interval = setInterval(() => {
@@ -50,6 +46,7 @@ const Spotify = () => {
     return () => clearInterval(interval);
   }, [currentSong]);
 
+  // if progress becomes greater than duration, check to see if another new song is playing and clear the timer
   useEffect(() => {
     if (currentSong) {
       if (progress > duration) {
@@ -59,36 +56,19 @@ const Spotify = () => {
     }
   }, [progress, duration]);
 
-  const showTime = (millis: number) => {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = parseInt(((millis % 60000) / 1000).toFixed(0));
-    return seconds == 60
-      ? minutes + 1 + ":00"
-      : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  };
-
-  const showPercentage = (progress: number, duration: number) => {
-    return ((progress / duration) * 100).toFixed();
-  };
-
-  if (loading) return <div className="text-center">loading...</div>;
+  if (loading) return;
 
   return (
-    <div
-      onMouseEnter={() => setPlayMarquee(true)}
-      onMouseLeave={() => setPlayMarquee(false)}
-      className="w-full h-full font-robot text-xl flex flex-col justify-center items-center p-2">
+    <div className="w-full h-full font-robot text-xl flex flex-col justify-center items-center p-2">
       {currentSong?.isPlaying ? (
         <>
-          <h1 className="text-xl mb-3 text-gray-400">Currently listening to...</h1>
+          <h1 className="text-xl self-start mb-3 text-gray-400">Currently listening to...</h1>
           <div className="flex gap-2 w-full items-center text-white">
             <img src={currentSong.albumImageUrl} className="w-16 rounded" />
             <div className="overflow-x-hidden w-full">
-              <Marquee gradient={false} play={playMarquee}>
-                <div className="text-center mb-2 whitespace-nowrap text-sm">
-                  {!!currentSong && currentSong.title} by: {!!currentSong && currentSong.artist}
-                </div>
-              </Marquee>
+              <div className="mb-2 whitespace-nowrap text-sm">
+                {!!currentSong && currentSong.title} by: {!!currentSong && currentSong.artist}
+              </div>
               <div className="flex gap-2 items-center">
                 <div className="w-[32px]">{showTime(progress)}</div>
                 <div className="bg-white w-full rounded-xl h-[10px]">
