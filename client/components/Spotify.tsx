@@ -56,7 +56,7 @@ const Spotify = () => {
     }
   }, [progress, duration]);
 
-  if (loading) return;
+  if (loading) return "loading...";
 
   return (
     <div className="w-full h-full font-robot text-xl flex flex-col justify-center items-center p-2">
