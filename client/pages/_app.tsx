@@ -2,11 +2,13 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 import Header from "../components/Header";
+import Favicon from "../components/Favicon";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <link rel="shortcut icon" href="/orange-favicon.png" />
         <title>Jeremiah Quill</title>
       </Head>
       <div className="w-full min-h-screen bg-gray-600 flex justify-center p-2">
