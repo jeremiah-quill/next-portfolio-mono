@@ -22,7 +22,9 @@ const Spotify = () => {
   const [playMarquee, setPlayMarquee] = useState<boolean>(false);
 
   const getCurrentSong = async () => {
-    const songObj = await getCurrentlyPlaying();
+    const res = await fetch("/api/getCurrentlyPlaying");
+    const songObj = await res.json();
+
     if (songObj && songObj.isPlaying) {
       setCurrentSong(songObj);
       setProgress(songObj.progress);
@@ -30,12 +32,10 @@ const Spotify = () => {
     } else {
       setCurrentSong(null);
     }
-    // setLoading(false);
   };
 
   useEffect(() => {
     getCurrentSong();
-    // getRecentTracks();
     setLoading(false);
   }, []);
 
@@ -77,7 +77,7 @@ const Spotify = () => {
     <div
       onMouseEnter={() => setPlayMarquee(true)}
       onMouseLeave={() => setPlayMarquee(false)}
-      className="w-full h-full font-robot text-xl">
+      className="w-full h-full font-robot text-xl flex flex-col justify-center items-center p-2">
       {currentSong?.isPlaying ? (
         <>
           <h1 className="text-xl mb-3 text-gray-400">Currently listening to...</h1>
@@ -105,12 +105,7 @@ const Spotify = () => {
           </div>
         </>
       ) : (
-        // <div className="h-full">
-        //   <h1 className="text-lg text-center text-gray-400">
-        //     Not currently listening to Spotify. But checkout my recently played tracks:
-        //   </h1>
         <RecentlyPlayed />
-        // </div>
       )}
     </div>
   );
