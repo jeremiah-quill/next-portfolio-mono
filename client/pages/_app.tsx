@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/orange-favicon.png" />
+        <link rel="shortcut icon" href="/orange-favicon.svg" />
         <title>Jeremiah Quill</title>
       </Head>
       <div className="w-full min-h-screen bg-gray-600 flex justify-center p-2">
