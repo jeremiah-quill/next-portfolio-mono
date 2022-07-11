@@ -8,6 +8,14 @@ import Spotify from "../components/Spotify";
 import About from "../components/About";
 import Gallery from "../components/Gallery";
 
+interface Project {
+  slug: string;
+  src: string;
+  title: string;
+  subtitle: string;
+  id: number;
+}
+
 export async function getStaticProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=*`);
   const { data: rawProjects } = await res.json();
@@ -25,13 +33,6 @@ export async function getStaticProps() {
       projects: projects,
     },
   };
-}
-interface Project {
-  slug: string;
-  src: string;
-  title: string;
-  subtitle: string;
-  id: number;
 }
 
 const Home: NextPage = ({ projects }: any) => {

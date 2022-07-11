@@ -1,29 +1,18 @@
 import { useEffect, useState } from "react";
 import RecentlyPlayed from "./RecentlyPlayed";
 import { showTime, showPercentage } from "../utils/helpers";
-
-type Song = {
-  isPlaying: boolean;
-  title: string;
-  artist: string;
-  album: string;
-  albumImageUrl: string;
-  songUrl: string;
-  duration: number;
-  progress: number;
-};
+import { Song } from "../lib/types";
 
 const Spotify = () => {
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [progress, setProgress] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
-  const [playMarquee, setPlayMarquee] = useState<boolean>(false);
 
   // function to fetch current song and set necessary state
   const getCurrentSong = async () => {
     const res = await fetch("/api/getCurrentlyPlaying");
-    const data = await res.json();
+    const data: Song = await res.json();
     if (!data.isPlaying) return;
     setCurrentSong(data);
     setProgress(data.progress);

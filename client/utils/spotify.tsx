@@ -9,11 +9,13 @@ export const getToken = async () => {
       Authorization:
         "Basic " +
         new Buffer(
-          process.env.NEXT_PUBLIC_CLIENT_ID + ":" + process.env.NEXT_PUBLIC_CLIENT_SECRET
+          // process.env.NEXT_PUBLIC_CLIENT_ID + ":" + process.env.NEXT_PUBLIC_CLIENT_SECRET
+          process.env.CLIENT_ID + ":" + process.env.CLIENT_SECRET
         ).toString("base64"),
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: `grant_type=refresh_token&refresh_token=${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
+    // body: `grant_type=refresh_token&refresh_token=${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
+    body: `grant_type=refresh_token&refresh_token=${process.env.REFRESH_TOKEN}`,
   });
   const data = await res.json();
   return data.access_token;

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getCurrentlyPlaying } from "../../utils/spotify";
+import { Song } from "../../lib/types";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const response = await getCurrentlyPlaying();
@@ -22,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const songUrl = song.item.external_urls.spotify;
   const duration = song.item.duration_ms;
   const progress = song.progress_ms;
-  const currentSongObj = {
+  const currentSongObj: Song = {
     isPlaying,
     title,
     artist,

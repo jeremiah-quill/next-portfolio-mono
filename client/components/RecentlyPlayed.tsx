@@ -15,7 +15,7 @@ const RecentlyPlayed = () => {
   }, []);
 
   return (
-    <div className="h-full p-1 pb-5">
+    <div className="h-full p-1 pb-5 w-full">
       {!showRecent ? (
         <button
           onClick={() => setShowRecent(true)}
