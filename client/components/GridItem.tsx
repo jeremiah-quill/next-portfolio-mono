@@ -8,10 +8,10 @@ type GridItemProps = {
 };
 
 // TODO: refactor types
-const GridItem = ({ colSpan, rowSpan, children = null }: GridItemProps) => {
+const GridItem = ({ colSpan, rowSpan, children }: GridItemProps) => {
   return (
     <div
-      className={`col-span-1 row-span-1 ${colSpan} ${rowSpan} text-black bg-gray-500 border-2 border-transparent flex justify-center items-center h-[300px] md:h-full w-full md:hover:border-orange-400 transition-all overflow-y-hidden`}>
+      className={`col-span-1 row-span-1 ${colSpan} ${rowSpan} text-black bg-gray-500 flex justify-center items-center h-[300px] md:h-full w-full border border-transparent md:hover:border-orange-400 transition-all overflow-y-hidden`}>
       {children}
     </div>
   );
