@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { isDev } from "../utils/helpers";
 import { motion } from "framer-motion";
-import { gridContainer } from "../utils/variants";
 
 import GridItem from "../components/GridItem";
 import IconLink from "../components/IconLink";
@@ -9,7 +8,6 @@ import IconInternalLink from "../components/IconInternalLink";
 import Spotify from "../components/Spotify";
 import About from "../components/About";
 import Gallery from "../components/Gallery";
-import { useEffect, useState } from "react";
 
 interface Project {
   slug: string;
@@ -43,9 +41,6 @@ const Home: NextPage = ({ projects }: any) => {
     <>
       <div className="w-full pt-16 font-robot">
         <motion.div
-          initial="initial"
-          animate="animate"
-          variants={gridContainer}
           className={`text-black grid gap-5 grid-cols-1 grid-rows-8 w-full h-full md:grid-cols-6 md:grid-rows-4 md:h-auto md:aspect-[1.5/1]`}>
           <GridItem colSpan={"md:col-span-2"} rowSpan={"md:row-span-2"}>
             <About />
