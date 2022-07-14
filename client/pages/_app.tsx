@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 import Header from "../components/Header";
@@ -8,6 +9,11 @@ import { pageTransition } from "../utils/variants";
 import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
+  const [animation, setAnimation] = useState(false);
+  useEffect(() => {
+    router.events.on("routeChangeStart", () => setAnimation(true));
+  }, []);
+
   return (
     <>
       <Head>
@@ -21,7 +27,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
             key={router.asPath}
             className="fixed w-full h-full top-0 bg-black z-50"
             initial="initial"
-            animate="animate"
+            animate={animation ? "animate" : "initial"}
             exit="exit"
             variants={pageTransition}></motion.div>
           <AnimatePresence initial={false} exitBeforeEnter>
