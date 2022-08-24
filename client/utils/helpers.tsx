@@ -36,6 +36,17 @@ export const extractProject = (rawProjectData: any) => {
   return formattedProject;
 };
 
+export const extractArt = (rawArtData: any) => {
+  const formattedArt = {
+    id: rawArtData.id,
+    title: rawArtData.attributes.title,
+    smallImg: rawArtData.attributes.image.data.attributes.formats.thumbnail.url,
+    bigImg: rawArtData.attributes.image.data.attributes.formats.large.url,
+  };
+
+  return formattedArt;
+};
+
 export const getCol = (num: number) => {
   switch (num) {
     case 1:
