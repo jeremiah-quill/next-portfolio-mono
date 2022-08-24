@@ -9,6 +9,13 @@ export type Song = {
   progress: number;
 };
 
+export type ImageTypes = {
+  lowQualityImg: string;
+  highQualityImg: string;
+  className: string;
+  aspectRatio: string;
+};
+
 // export type Post = {
 //   _id: string;
 //   slug: string;

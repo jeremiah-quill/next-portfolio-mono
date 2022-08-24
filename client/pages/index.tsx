@@ -12,6 +12,7 @@ import Gallery from "../components/Gallery";
 interface Project {
   slug: string;
   src: string;
+  thumbnail: string;
   title: string;
   subtitle: string;
   id: number;
@@ -24,6 +25,7 @@ export async function getStaticProps() {
   const projects = rawProjects.map((project: any) => ({
     slug: project.attributes.slug,
     src: project.attributes.featuredImgBig?.data[0].attributes.url,
+    thumbnail: project.attributes.featuredImgBig?.data[0].attributes.formats.thumbnail.url,
     title: project.attributes.title,
     subtitle: project.attributes.subtitle,
     id: project.id,

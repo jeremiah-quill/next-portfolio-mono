@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { isDev } from "../utils/helpers";
 import { sliderVariants } from "../utils/variants";
 import { wrap } from "popmotion";
+import ProgressiveImg from "./ProgressiveImg";
 
 const Gallery = ({ projects }: any) => {
   const [[page, direction], setPage] = useState([0, 0]);
@@ -44,6 +45,16 @@ const Gallery = ({ projects }: any) => {
                   }`}
                   className="w-5/6 m-auto rounded"
                 />
+                {/* <ProgressiveImg
+                  className="w-5/6 m-auto rounded"
+                  aspectRatio="auto"
+                  lowQualityImg={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${
+                    projects[imageIndex].thumbnail
+                  }`}
+                  highQualityImg={`${isDev() ? process.env.NEXT_PUBLIC_STRAPI_URL : ""}${
+                    projects[imageIndex].src
+                  }`}
+                /> */}
               </div>
             </a>
           </Link>

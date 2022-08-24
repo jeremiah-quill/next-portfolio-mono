@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ProgressiveImg from "./ProgressiveImg";
 
 const About = () => {
   return (
     <Link href="/about">
       <a className="h-full w-full object-fill overflow-hidden">
-        <motion.img
-          src="/bio-img-compress.png"
-          // layoutId="bioImg"
+        <ProgressiveImg
           className="object-cover h-full w-full"
-          transition={{ duration: 1 }}
-          alt="Jeremiah"
+          aspectRatio="1"
+          lowQualityImg={"./bio-img-compress_small.png"}
+          highQualityImg={"./bio-img-compress.png"}
         />
+        {/* className="object-cover h-full w-full" */}
       </a>
     </Link>
   );
