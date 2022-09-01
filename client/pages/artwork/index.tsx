@@ -7,22 +7,22 @@ import ArtworkGallery from "../../components/ArtworkGallery";
 export async function getStaticProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/artworks?populate=*`);
   const { data: rawArtwork } = await res.json();
+  console.log(rawArtwork);
 
   const allArt = rawArtwork.map((rawArtwork: any) => {
     return extractArt(rawArtwork);
   });
 
-  console.log(allArt);
-
   return {
     props: {
       art: allArt,
     },
-    revalidate: 3600,
+    revalidate: 300,
   };
 }
 
 const ArtworkPage = ({ art }: { art: any }) => {
+  console.log(art);
   return (
     <div className="relative w-full h-full font-robot">
       <div className="m-auto w-full text-center pt-36 pb-20 text-2xl text-gray-400">

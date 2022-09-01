@@ -41,7 +41,7 @@ export const extractArt = (rawArtData: any) => {
     id: rawArtData.id,
     title: rawArtData.attributes.title,
     smallImg: rawArtData.attributes.image.data.attributes.formats.thumbnail.url,
-    bigImg: rawArtData.attributes.image.data.attributes.formats.large.url,
+    bigImg: rawArtData.attributes.image.data.attributes.formats.medium.url,
   };
 
   return formattedArt;
