@@ -39,7 +39,8 @@ export const extractProject = (rawProjectData: any) => {
 export const extractArt = (rawArtData: any) => {
   const formattedArt = {
     id: rawArtData.id,
-    title: rawArtData.attributes.title,
+    job_id: rawArtData.attributes.job_id,
+    slug: rawArtData.attributes.slug,
     smallImg: rawArtData.attributes.image.data.attributes.formats.thumbnail.url,
     bigImg: rawArtData.attributes.image.data.attributes.formats.medium.url,
   };

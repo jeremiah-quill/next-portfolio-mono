@@ -1,13 +1,11 @@
-// import Link from "next/link";
 import { extractArt } from "../../utils/helpers";
-import ProgressiveImg from "../../components/ProgressiveImg";
-import ArtworkGallery from "../../components/ArtworkGallery";
+import ArtworkGalleryImage from "../../components/ArtworkGalleryImage";
+import Masonry from "react-masonry-css";
 
 // TODO: make this 100% type safe
 export async function getStaticProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/artworks?populate=*`);
   const { data: rawArtwork } = await res.json();
-  console.log(rawArtwork);
 
   const allArt = rawArtwork.map((rawArtwork: any) => {
     return extractArt(rawArtwork);
@@ -22,11 +20,17 @@ export async function getStaticProps() {
 }
 
 const ArtworkPage = ({ art }: { art: any }) => {
-  console.log(art);
   return (
     <div className="relative w-full h-full font-robot">
       <div className="m-auto w-full text-center pt-36 pb-20 text-2xl text-gray-400">
-        <ArtworkGallery art={art} />
+        <Masonry
+          breakpointCols={3}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column">
+          {art.map((pieceOfArt: any) => (
+            <ArtworkGalleryImage art={pieceOfArt} key={pieceOfArt.id} />
+          ))}
+        </Masonry>
       </div>
     </div>
   );

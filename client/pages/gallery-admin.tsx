@@ -16,8 +16,12 @@ const GalleryAdminPage = () => {
   };
 
   const createNewGalleryImage = async (image: any) => {
+    const nameString = image.name;
+    const nameArray = nameString.split("");
+    const jobId = nameArray.slice(64, nameArray.length - 4).join("");
+
     const formData = new FormData();
-    formData.append("data", JSON.stringify({}));
+    formData.append("data", JSON.stringify({ job_id: jobId }));
     formData.append("files.image", image);
 
     const res = await fetch("http://localhost:1337/api/artworks", {
